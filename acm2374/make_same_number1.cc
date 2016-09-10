@@ -15,9 +15,7 @@ int Part(int preMax, int x, int y){
     for(int i=x; i<=y;i++){
         if(A[i]==maxValue) maxLoc = i;
     }
-//  printf("%d %d %d %d\n", x, y, preMax, maxValue);
-    //output += preMax-maxValue;
-//  printf("%d\n", preMax-maxValue);
+
 
     if(x>=y){output+=preMax-maxValue; return preMax-maxValue;}
     else if(x==maxLoc) {output+= preMax-maxValue; return Part(maxValue,x+1,y);}
@@ -37,7 +35,6 @@ int main(){
         A.push_back(input);
     }
     int maxValue = *max_element(A.begin(), A.end());
-    //printf("%d\n", Part(maxValue, 0, n-1));
     Part(maxValue,0,n-1);
     printf("%d\n", output);
 }
