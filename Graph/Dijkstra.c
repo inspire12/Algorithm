@@ -106,7 +106,7 @@ int isPQ(minHeap* h, int k) {
 	}
 	return 1;
 }
-printDist(minHeap* h) {
+void printDist(minHeap* h) {
 	int s = h->size; int i = 0;
 	while(s--) {
 		i++; if (isPQ(h, i)) { s++; continue; }
