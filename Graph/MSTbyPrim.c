@@ -1,39 +1,31 @@
 #define _CRT_SECURE_NO_WARNINGS
-/* Prim's Algorithm 
-	make a tree? 
-	save a edge?
-	how to know graph is not cycle
-	dynamic list as malloc
+/* Prim's Algorithm
+make a tree?
+save a edge?
+how to know graph is not cycle
+dynamic list as malloc
 */
 #include <stdio.h>
-#include <vector>
-#include <queue>
 #define inf 987654321
 #define unused 9999999
-using namespace std;
-//
-//typedef struct edge {
-//	int u,v,w;
-//	bool operator>(const edge e) const {
-//		return w > e.w;
-//	}
-//};
-//queue? priorty for
+
+
+
 // a1,b2,c3,d4,e5,f6,g7,h8,i9
 int key[10];
 int parentVertex[10];
 
 int graph[10][10] =
 {
-	{unused,unused, unused, unused, unused, unused, unused, unused, unused, unused},
-	{ unused,inf,4,inf,inf,inf,inf,inf,8,inf},
-	{ unused,4,inf,8,inf,inf,inf,inf,11,inf},
-	{ unused,inf,8,inf,7,inf,4,inf,inf,2},
-	{ unused,inf,inf,7,inf,9,14,inf, inf, inf},
-	{ unused,inf,inf,inf,9,inf,10,inf,inf ,inf},
-	{ unused,inf,inf, 4, 14, 10,inf, 2,inf, inf},
-	{ unused,inf, inf, inf, inf, inf,2,inf, 1,6},
-	{ unused,8,inf,inf, inf, inf, inf, 7, inf,1},
+	{ unused,unused, unused, unused, unused, unused, unused, unused, unused, unused },
+	{ unused,inf,4,inf,inf,inf,inf,inf,8,inf },
+	{ unused,4,inf,8,inf,inf,inf,inf,11,inf },
+	{ unused,inf,8,inf,7,inf,4,inf,inf,2 },
+	{ unused,inf,inf,7,inf,9,14,inf, inf, inf },
+	{ unused,inf,inf,inf,9,inf,10,inf,inf ,inf },
+	{ unused,inf,inf, 4, 14, 10,inf, 2,inf, inf },
+	{ unused,inf, inf, inf, inf, inf,2,inf, 1,6 },
+	{ unused,8,inf,inf, inf, inf, inf, 7, inf,1 },
 	{ unused,inf, inf, 2,inf, inf, 6,7, inf }
 };
 void swap(int *a, int *b) {
@@ -138,7 +130,7 @@ char printVertex(int i) {
 }
 int spanningTree[9][9];
 int main() {
-	int start =1; //arbitary chosen point
+	int start = 1; //arbitary chosen point
 	minHeap* pq = (minHeap*)malloc(sizeof(minHeap));
 	pq->size = 0;
 	for (int i = 1; i <= 9; i++) {
@@ -146,28 +138,29 @@ int main() {
 		else key[i] = inf;
 		push(pq, i);
 	}
-	while(!isEmpty(pq)){
+	while (!isEmpty(pq)) {
 		buildMinHeap(pq);
 		int u = pop(pq);
 		if (parentVertex[u] == 0) {
-			printf("w< ,%c> = %d\n", printVertex(u),key[parentVertex[u]]);
-		}else{
+			printf("w< ,%c> = %d\n", printVertex(u), key[parentVertex[u]]);
+		}
+		else {
 			printf("w<%c,%c> = %d\n", printVertex(parentVertex[u]), printVertex(u), key[u]);
 		}
 		for (int v = 1; v <= 9; v++) {
 			if (graph[u][v] != inf) {
-				if (isNotPQ(pq,v) && key[v] > graph[u][v]){
+				if (isNotPQ(pq, v) && key[v] > graph[u][v]) {
 					key[v] = graph[u][v];
 					parentVertex[v] = u;
-					
+
 				}
 			}
 		}
 	}
 	int sum = 0;
-	for (int i =1;i<=9;i++) {
+	for (int i = 1; i <= 9; i++) {
 		sum += key[i];
 	}
-	printf("w<MST> = %d\n",sum);
+	printf("w<MST> = %d\n", sum);
 
 }
